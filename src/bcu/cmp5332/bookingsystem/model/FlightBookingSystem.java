@@ -51,7 +51,17 @@ public class FlightBookingSystem {
         flights.put(flight.getId(), flight);
     }
 
-    public void addCustomer(Customer customer) {
-        // TODO: implementation here
+    public void addCustomer(Customer customer) throws FlightBookingSystemException {
+        if(customers.containsKey(customer.getId())){
+            throw new IllegalArgumentException("Duplicate customer ID.");
+        }
+        for (Customer existingCustomer : customers.values()){
+            if(existingCustomer.getName().equals(customer.getName())
+                && existingCustomer.getPhone().equals(customer.getPhone())) {
+                throw new FlightBookingSystemException("There is already a customer with the same name"
+                        + " and phone details in the system.");
+            }
+        }
+        customers.put(customer.getId(), customer);
     }
 }
