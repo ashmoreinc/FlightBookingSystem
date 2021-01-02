@@ -32,7 +32,6 @@ public class FlightBookingSystemData {
     }
 
     public static void store(FlightBookingSystem fbs) throws IOException {
-
         for (DataManager dm : dataManagers) {
             dm.storeData(fbs);
         }

@@ -18,4 +18,10 @@ public class Customer {
     public void addBooking(Booking booking) {
         // TODO: implementation here
     }
+
+    public String getDetailsShort(){
+        return "ID #" + this.id + " - " + this.name + " - " + this.phone + " - Bookings: " + bookings.size();
+    }
 }
+
+
