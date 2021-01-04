@@ -62,7 +62,8 @@ public class CommandParser {
 				} else if (cmd.equals("editbooking")) {
 
 				} else if (cmd.equals("cancelbooking")) {
-
+					// Cancel booking args: arg1 = customerID. arg2 = flightID
+					return new CancelBooking(arg1Int, arg2Int);
 				}
 			}
 		} catch (NumberFormatException ex) {

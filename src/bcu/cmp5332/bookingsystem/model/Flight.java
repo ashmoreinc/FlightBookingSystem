@@ -92,4 +92,15 @@ public class Flight {
 
         this.passengers.add(passenger);
     }
+
+    public void removePassenger(Customer passenger){
+        for (Customer customer : this.passengers) {
+            if(customer.getId() == passenger.getId()) {
+                this.passengers.remove(customer);
+                return;
+            }
+        }
+
+        throw new IllegalArgumentException("This passenger was not on this flight.");
+    }
 }
