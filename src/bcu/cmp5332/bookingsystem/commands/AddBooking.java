@@ -28,6 +28,7 @@ public class AddBooking implements Command {
 
         try {
             customer.addBooking(booking);
+            flight.addPassenger(customer);
             System.out.println("Booking added for " + customer.getName() + "(" + customerID + ") for flight #" + flight.getId());
         } catch (IllegalArgumentException ex) {
             throw new FlightBookingSystemException(ex.getMessage());

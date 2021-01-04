@@ -84,6 +84,12 @@ public class Flight {
     }
     
     public void addPassenger(Customer passenger) {
-        
+        for (Customer customer : this.passengers) {
+            if(customer.getId() == passenger.getId()) {
+                throw new IllegalArgumentException("There is already a passenger with the same ID on this flight.");
+            }
+        }
+
+        this.passengers.add(passenger);
     }
 }
