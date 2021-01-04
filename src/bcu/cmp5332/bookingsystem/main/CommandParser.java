@@ -53,11 +53,12 @@ public class CommandParser {
 
 				}
 			} else if (parts.length == 3) {
-				int patronID = Integer.parseInt(parts[1]);
-				int bookID = Integer.parseInt(parts[2]);
+				int arg1Int = Integer.parseInt(parts[1]); // Renamed from patronID as the first argument is not always the patron.
+				int arg2Int = Integer.parseInt(parts[2]);
 
 				if (cmd.equals("addbooking")) {
-
+					// Add booking args: arg1 = customerID. arg2 = flightID
+					return new AddBooking(arg1Int, arg2Int);
 				} else if (cmd.equals("editbooking")) {
 
 				} else if (cmd.equals("cancelbooking")) {

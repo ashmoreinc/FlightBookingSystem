@@ -45,8 +45,20 @@ public class Customer {
         return bookings;
     }
     
-    public void addBooking(Booking booking) {
-        // TODO: implementation here
+    public void addBooking(Booking booking) throws IllegalArgumentException{
+        Customer bookingCustomer = booking.getCustomer();
+        if(bookingCustomer.getId() != this.getId()){
+            throw new IllegalArgumentException("booking customer must have the same id as the customer you are adding the booking too.");
+        }
+
+        // Check for existing bookings for this flight
+        for(Booking existingBooking : this.bookings){
+            if(existingBooking.getFlight().getId() == booking.getFlight().getId()){
+                throw new IllegalArgumentException("This customer already has a booking for this flight.");
+            }
+        }
+
+        this.bookings.add(booking);
     }
 
     public String getDetailsShort(){

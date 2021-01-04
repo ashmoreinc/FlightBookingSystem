@@ -33,8 +33,9 @@ public class FlightBookingSystem {
     }
 
     public Customer getCustomerByID(int id) throws FlightBookingSystemException {
-        // TODO: implementation here
-        return null;
+        if(!this.customers.containsKey(id)) throw new FlightBookingSystemException("There is no customer with that ID.");
+
+        return customers.get(id);
     }
 
     public void addFlight(Flight flight) throws FlightBookingSystemException {
