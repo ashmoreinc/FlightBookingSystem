@@ -84,7 +84,7 @@ public class Customer {
     }
 
     public String getDetailsShort(){
-        return "ID #" + this.id + " - " + this.name + " - " + this.phone +this.email + " - Bookings: " + bookings.size();
+        return "ID #" + this.id + " - " + this.name + " - " + this.phone + " " + this.email + " - Bookings: " + bookings.size();
     }
 }
 

@@ -46,6 +46,7 @@ public class CustomerDataManager implements DataManager {
                 out.print(customer.getId() + SEPARATOR);
                 out.print(customer.getName() + SEPARATOR);
                 out.print(customer.getPhone() + SEPARATOR);
+                out.print(customer.getEmail() + SEPARATOR);
                 out.println();
             }
         }
