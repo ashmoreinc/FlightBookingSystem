@@ -12,7 +12,6 @@ public class Booking {
         this.customer = customer;
         this.flight = flight;
         this.bookingDate = bookingDate;
-        
     }
 
     public Customer getCustomer() {
