@@ -99,7 +99,8 @@ public class AddFlightWindow extends JFrame implements ActionListener {
                 throw new FlightBookingSystemException("Date must be in YYYY-DD-MM format");
             }
             // create and execute the AddFlight Command
-            Command addFlight = new AddFlight(flightNumber, origin, destination, departureDate);
+            // TODO: Change the 0, 0 when GUI fields have been properly developed.
+            Command addFlight = new AddFlight(flightNumber, origin, destination, departureDate, 0, 0);
             addFlight.execute(mw.getFlightBookingSystem());
             // refresh the view with the list of flights
             mw.displayFlights();

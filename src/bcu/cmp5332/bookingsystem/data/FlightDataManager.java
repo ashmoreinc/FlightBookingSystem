@@ -18,21 +18,47 @@ public class FlightDataManager implements DataManager {
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {
         try (Scanner sc = new Scanner(new File(RESOURCE))) {
             int line_idx = 1;
+
+            int id, capacity, basePrice;
+            String flightNumber, origin, destination;
+            LocalDate departureDate;
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] properties = line.split(SEPARATOR, -1);
+
+                // Handle id parsing
                 try {
-                    int id = Integer.parseInt(properties[0]);
-                    String flightNumber = properties[1];
-                    String origin = properties[2];
-                    String destination = properties[3];
-                    LocalDate departureDate = LocalDate.parse(properties[4]);
-                    Flight flight = new Flight(id, flightNumber, origin, destination, departureDate);
-                    fbs.addFlight(flight);
+                    id = Integer.parseInt(properties[0]);
+
                 } catch (NumberFormatException ex) {
                     throw new FlightBookingSystemException("Unable to parse ID " + properties[0] + " on line " + line_idx
                         + "\nError: " + ex);
                 }
+
+                flightNumber = properties[1];
+                origin = properties[2];
+                destination = properties[3];
+                departureDate = LocalDate.parse(properties[4]);
+
+                // Handle capacity/available seats parsing
+                try {
+                    capacity = Integer.parseInt(properties[5]);
+                }catch(NumberFormatException ex){
+                    throw new FlightBookingSystemException("Unable to parse seat capacity " + properties[5] + " on line " + line_idx
+                            + "\nError: " + ex);
+                }
+
+                // Handle base price parsing
+                try {
+                    basePrice = Integer.parseInt(properties[6]);
+                }catch(NumberFormatException ex){
+                    throw new FlightBookingSystemException("Unable to parse seat price " + properties[6] + " on line " + line_idx
+                            + "\nError: " + ex);
+                }
+
+
+                Flight flight = new Flight(id, flightNumber, origin, destination, departureDate, capacity, basePrice);
+                fbs.addFlight(flight);
                 line_idx++;
             }
         }
@@ -47,6 +73,8 @@ public class FlightDataManager implements DataManager {
                 out.print(flight.getOrigin() + SEPARATOR);
                 out.print(flight.getDestination() + SEPARATOR);
                 out.print(flight.getDepartureDate() + SEPARATOR);
+                out.print(flight.getCapacity() + SEPARATOR);
+                out.print(flight.getBasePrice() + SEPARATOR);
                 out.println();
             }
         }
