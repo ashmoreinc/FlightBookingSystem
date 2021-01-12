@@ -38,8 +38,10 @@ public class CommandParser {
 				String name = br.readLine();
 				System.out.println("Phone: ");
 				String phone = br.readLine();
+				System.out.println("Email: ");
+				String email = br.readLine();
 
-				return new AddCustomer(name, phone);
+				return new AddCustomer(name, phone, email);
 			} else if (cmd.equals("loadgui")) {
 				return new LoadGUI();
 			} else if (parts.length == 1) {

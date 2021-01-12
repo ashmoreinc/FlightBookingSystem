@@ -9,12 +9,14 @@ public class Customer {
     private int id;
     private String name;
     private String phone;
+    private String email;
     private final List<Booking> bookings = new ArrayList<>();
 
-    public Customer(int id, String name, String phone) {
+    public Customer(int id, String name, String phone, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
+        this.email = email;
     }
 
     public int getId() {
@@ -39,6 +41,14 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<Booking> getBookings() {
@@ -74,7 +84,7 @@ public class Customer {
     }
 
     public String getDetailsShort(){
-        return "ID #" + this.id + " - " + this.name + " - " + this.phone + " - Bookings: " + bookings.size();
+        return "ID #" + this.id + " - " + this.name + " - " + this.phone +this.email + " - Bookings: " + bookings.size();
     }
 }
 
