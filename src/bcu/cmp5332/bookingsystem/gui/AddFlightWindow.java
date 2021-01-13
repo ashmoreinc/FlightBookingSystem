@@ -83,7 +83,6 @@ public class AddFlightWindow extends JFrame implements ActionListener {
         } else if (ae.getSource() == cancelBtn) {
             this.setVisible(false);
         }
-
     }
 
     private void addBook() {

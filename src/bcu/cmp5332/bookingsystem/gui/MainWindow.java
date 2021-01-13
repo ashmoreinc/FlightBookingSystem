@@ -168,7 +168,7 @@ public class MainWindow extends JFrame implements ActionListener {
             displayCustomers();
             
         } else if (ae.getSource() == custAdd) {
-            
+            new AddCustomerWindow(this);
             
         } else if (ae.getSource() == custDel) {
             
