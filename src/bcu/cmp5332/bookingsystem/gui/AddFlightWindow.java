@@ -25,6 +25,8 @@ public class AddFlightWindow extends JFrame implements ActionListener {
     private JTextField originText = new JTextField();
     private JTextField destinationText = new JTextField();
     private JTextField depDateText = new JTextField();
+    private JTextField capacityText = new JTextField();
+    private JTextField basePriceText = new JTextField();
 
     private JButton addBtn = new JButton("Add");
     private JButton cancelBtn = new JButton("Cancel");
@@ -49,7 +51,7 @@ public class AddFlightWindow extends JFrame implements ActionListener {
 
         setSize(350, 220);
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(5, 2));
+        topPanel.setLayout(new GridLayout(7, 2));
         topPanel.add(new JLabel("Flight No : "));
         topPanel.add(flightNoText);
         topPanel.add(new JLabel("Origin : "));
@@ -58,6 +60,10 @@ public class AddFlightWindow extends JFrame implements ActionListener {
         topPanel.add(destinationText);
         topPanel.add(new JLabel("Departure Date (YYYY-MM-DD) : "));
         topPanel.add(depDateText);
+        topPanel.add(new JLabel("Available seats: "));
+        topPanel.add(capacityText);
+        topPanel.add(new JLabel("Seat base cost (pence): "));
+        topPanel.add(basePriceText);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(1, 3));
@@ -91,15 +97,28 @@ public class AddFlightWindow extends JFrame implements ActionListener {
             String origin = originText.getText();
             String destination = destinationText.getText();
             LocalDate departureDate = null;
+            int capacity, basePrice;
             try {
                 departureDate = LocalDate.parse(depDateText.getText());
             }
             catch (DateTimeParseException dtpe) {
                 throw new FlightBookingSystemException("Date must be in YYYY-DD-MM format");
             }
+
+            try {
+                capacity = Integer.parseInt(capacityText.getText());
+            } catch (NumberFormatException ex) {
+                throw new FlightBookingSystemException("Available seats must be a whole number.");
+            }
+
+            try {
+                basePrice = Integer.parseInt(basePriceText.getText());
+            } catch (NumberFormatException ex) {
+                throw new FlightBookingSystemException("Seat cost must be a whole number in pence.");
+            }
+
             // create and execute the AddFlight Command
-            // TODO: Change the 0, 0 when GUI fields have been properly developed.
-            Command addFlight = new AddFlight(flightNumber, origin, destination, departureDate, 0, 0);
+            Command addFlight = new AddFlight(flightNumber, origin, destination, departureDate, capacity, basePrice);
             addFlight.execute(mw.getFlightBookingSystem());
             // refresh the view with the list of flights
             mw.displayFlights();

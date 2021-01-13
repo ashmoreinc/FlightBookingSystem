@@ -190,7 +190,7 @@ public class MainWindow extends JFrame implements ActionListener {
             data[i][3] = flight.getDepartureDate();
             data[i][4] = flight.getCapacity();
             data[i][5] = flight.getPassengers().size();
-            data[i][6] = flight.getBasePrice() / 100;
+            data[i][6] = Double.parseDouble(String.valueOf(flight.getBasePrice())) / 100;
         }
 
         JTable table = new JTable(data, columns);
