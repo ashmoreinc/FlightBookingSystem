@@ -1,9 +1,12 @@
 package bcu.cmp5332.bookingsystem.commands;
 
+import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
+
+import java.io.IOException;
 
 public class CancelBooking implements Command{
     int customerID, flightID;
@@ -35,6 +38,13 @@ public class CancelBooking implements Command{
             System.out.println("Customer removed from Flight.");
         } catch (IllegalArgumentException ex){
             throw new FlightBookingSystemException(ex.getMessage());
+        }
+
+        try {
+            FlightBookingSystemData.store(flightBookingSystem);
+        } catch (IOException ex) {
+            throw new FlightBookingSystemException("Successfully executed. However data could not be saved at this time."
+                    + "\nError: " + ex.getMessage());
         }
     }
 }

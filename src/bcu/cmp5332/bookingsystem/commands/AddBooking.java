@@ -1,11 +1,13 @@
 package bcu.cmp5332.bookingsystem.commands;
 
+import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Booking;
 import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class AddBooking implements Command {
@@ -32,6 +34,13 @@ public class AddBooking implements Command {
             System.out.println("Booking added for " + customer.getName() + "(" + customerID + ") for flight #" + flight.getId());
         } catch (IllegalArgumentException ex) {
             throw new FlightBookingSystemException(ex.getMessage());
+        }
+
+        try {
+            FlightBookingSystemData.store(flightBookingSystem);
+        } catch (IOException ex) {
+            throw new FlightBookingSystemException("Successfully executed. However data could not be saved at this time."
+                    + "\nError: " + ex.getMessage());
         }
     }
 }

@@ -1,8 +1,11 @@
 package bcu.cmp5332.bookingsystem.commands;
 
+import bcu.cmp5332.bookingsystem.data.FlightBookingSystemData;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Customer;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
+
+import java.io.IOException;
 
 /**
  * Command for adding a Customer to the FlightBookingSystem. Execute adds the customer supplied to the FlightBookingSystem
@@ -33,5 +36,12 @@ public class AddCustomer implements Command {
         Customer customer = new Customer(++maxId, this.name, this.phone, this.email);
         flightBookingSystem.addCustomer(customer);
         System.out.println("Customer #" + customer.getId() + " added.");
+
+        try {
+            FlightBookingSystemData.store(flightBookingSystem);
+        } catch (IOException ex) {
+            throw new FlightBookingSystemException("Successfully executed. However data could not be saved at this time."
+                    + "\nError: " + ex.getMessage());
+        }
     }
 }
