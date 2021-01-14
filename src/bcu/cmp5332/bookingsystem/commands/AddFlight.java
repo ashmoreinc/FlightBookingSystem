@@ -8,7 +8,7 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class AddFlight implements  Command {
+public class AddFlight implements Command {
 
     private final String flightNumber;
     private final String origin;

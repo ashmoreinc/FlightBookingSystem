@@ -32,6 +32,16 @@ public class FlightBookingSystem {
         return flights.get(id);
     }
 
+    public Flight getFlightByNumber(String flightNumber) throws FlightBookingSystemException {
+        for(Flight flightEntry : flights.values()){
+            if(flightEntry.getFlightNumber() == flightNumber){
+                return flightEntry;
+            }
+        }
+
+        throw new FlightBookingSystemException("There is no flight with that number.");
+    }
+
     public Customer getCustomerByID(int id) throws FlightBookingSystemException {
         if(!this.customers.containsKey(id)) throw new FlightBookingSystemException("There is no customer with that ID.");
 
@@ -42,6 +52,12 @@ public class FlightBookingSystem {
         if (flights.containsKey(flight.getId())) {
             throw new IllegalArgumentException("Duplicate flight ID.");
         }
+        for(Flight flightEntry : flights.values()){
+            if(flightEntry.getFlightNumber() == flight.getFlightNumber()){
+                throw new FlightBookingSystemException("Duplicate flight number.");
+            }
+        }
+
         for (Flight existing : flights.values()) {
             if (existing.getFlightNumber().equals(flight.getFlightNumber()) 
                 && existing.getDepartureDate().isEqual(flight.getDepartureDate())) {
