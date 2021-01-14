@@ -12,11 +12,15 @@ public class Customer {
     private String email;
     private final List<Booking> bookings = new ArrayList<>();
 
+    private boolean deleted;
+
     public Customer(int id, String name, String phone, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
+
+        this.deleted = false;
     }
 
     public int getId() {
@@ -71,7 +75,7 @@ public class Customer {
         this.bookings.add(booking);
     }
 
-    public void cancelBooking(int flightID) {
+    public void cancelBooking(int flightID) throws IllegalArgumentException{
         // Check for existing bookings for this flight
         for(Booking existingBooking : this.bookings){
             if(existingBooking.getFlight().getId() == flightID){
@@ -85,6 +89,18 @@ public class Customer {
 
     public String getDetailsShort(){
         return "ID #" + this.id + " - " + this.name + " - " + this.phone + " " + this.email + " - Bookings: " + bookings.size();
+    }
+
+    public void delete(){
+        this.deleted = true;
+    }
+
+    public void reinstate(){
+        this.deleted = false;
+    }
+
+    public boolean getDeleted(){
+        return this.deleted;
     }
 }
 

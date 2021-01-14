@@ -65,4 +65,28 @@ public class FlightBookingSystem {
         }
         customers.put(customer.getId(), customer);
     }
+
+    public void removeFlight (int flightID) throws FlightBookingSystemException{
+        if(this.flights.containsKey(flightID)) {
+            if(!this.flights.get(flightID).getDeleted()){
+                this.flights.get(flightID).delete();
+            } else {
+                throw new FlightBookingSystemException("Flight ID#" + flightID + " is already deleted.");
+            }
+        } else {
+            throw new FlightBookingSystemException("No flight with ID#" + flightID + " could be found for deletion");
+        }
+    }
+
+    public void removeCustomer (int customerID) throws FlightBookingSystemException{
+        if(this.customers.containsKey(customerID)) {
+            if(!this.customers.get(customerID).getDeleted()){
+                this.customers.get(customerID).delete();
+            } else {
+                throw new FlightBookingSystemException("Customer ID#" + customerID + " is already deleted.");
+            }
+        } else {
+            throw new FlightBookingSystemException("No customer with ID#" + customerID + " could be found for deletion.");
+        }
+    }
 }

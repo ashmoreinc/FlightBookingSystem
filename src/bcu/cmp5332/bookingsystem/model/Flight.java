@@ -18,6 +18,8 @@ public class Flight {
 
     private int capacity, basePrice;
 
+    private boolean deleted;
+
     private final Set<Customer> passengers;
 
     public Flight(int id, String flightNumber, String origin, String destination, LocalDate departureDate, int capacity, int basePrice) {
@@ -29,6 +31,8 @@ public class Flight {
 
         this.capacity = capacity;
         this.basePrice = basePrice;
+
+        this.deleted = false;
 
         passengers = new HashSet<>();
     }
@@ -123,5 +127,17 @@ public class Flight {
         }
 
         throw new IllegalArgumentException("This passenger was not on this flight.");
+    }
+
+    public void delete(){
+        this.deleted = true;
+    }
+
+    public void reinstate(){
+        this.deleted = false;
+    }
+
+    public boolean getDeleted(){
+        return this.deleted;
     }
 }

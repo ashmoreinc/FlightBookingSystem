@@ -56,8 +56,12 @@ public class FlightDataManager implements DataManager {
                             + "\nError: " + ex);
                 }
 
+                boolean deleted = Boolean.parseBoolean(properties[7]);
 
                 Flight flight = new Flight(id, flightNumber, origin, destination, departureDate, capacity, basePrice);
+                if(deleted) {
+                    flight.delete();
+                }
                 fbs.addFlight(flight);
                 line_idx++;
             }
@@ -75,6 +79,7 @@ public class FlightDataManager implements DataManager {
                 out.print(flight.getDepartureDate() + SEPARATOR);
                 out.print(flight.getCapacity() + SEPARATOR);
                 out.print(flight.getBasePrice() + SEPARATOR);
+                out.print(flight.getDeleted() + SEPARATOR);
                 out.println();
             }
         }
