@@ -18,7 +18,7 @@ public class CommandParser {
 			if (cmd.equals("addflight")) {
 				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 				System.out.print("Flight Number: ");
-				String flighNumber = br.readLine();
+				String flightNumber = br.readLine();
 				System.out.print("Origin: ");
 				String origin = br.readLine();
 				System.out.print("Destination: ");
@@ -31,7 +31,7 @@ public class CommandParser {
 				int basePrice = Integer.parseInt(br.readLine());
 
 				LocalDate departureDate = parseDateWithAttempts(br);
-				return new AddFlight(flighNumber, origin, destination, departureDate, capacity, basePrice);
+				return new AddFlight(flightNumber, origin, destination, departureDate, capacity, basePrice);
 			} else if (cmd.equals("addcustomer")) {
 				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 				System.out.println("Name: ");
