@@ -17,12 +17,11 @@ public class DeleteCustomer implements Command{
 
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
-        Customer customer = flightBookingSystem.getCustomerByID(this.customerID);
-
-        customer.delete();
+        flightBookingSystem.removeCustomer(customerID);
 
         try {
             FlightBookingSystemData.store(flightBookingSystem);
+            System.out.println("Stored");
         } catch (IOException ex) {
             throw new FlightBookingSystemException("Successfully executed. However data could not be saved at this time."
                     + "\nError: " + ex.getMessage());

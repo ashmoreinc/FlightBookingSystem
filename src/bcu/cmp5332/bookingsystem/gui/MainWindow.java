@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -171,7 +169,7 @@ public class MainWindow extends JFrame implements ActionListener {
             new AddCustomerWindow(this);
             
         } else if (ae.getSource() == custDel) {
-            
+            new DeleteCustomerWindow(this, fbs);
             
         }
     }
