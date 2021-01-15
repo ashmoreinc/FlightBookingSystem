@@ -119,5 +119,8 @@ public class DeleteFlightWindow extends JFrame implements ActionListener {
                     ex.getMessage(), "Could not delete flight.", JOptionPane.ERROR_MESSAGE);
             this.setVisible(false);
         }
+
+        // Refresh the view with the customer list
+        mw.displayFlights();
     }
 }

@@ -118,6 +118,9 @@ public class DeleteCustomerWindow extends JFrame implements ActionListener {
                     ex.getMessage(), "Could not delete user.", JOptionPane.ERROR_MESSAGE);
             this.setVisible(false);
         }
+
+        // Refresh the view with the customer list
+        mw.displayCustomers();
     }
 
 }
