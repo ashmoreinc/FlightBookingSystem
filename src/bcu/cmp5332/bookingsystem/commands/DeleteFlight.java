@@ -8,15 +8,15 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 import java.io.IOException;
 
 public class DeleteFlight implements Command{
-    private final String flightNumber;
+    private final int flightId;
 
-    public DeleteFlight (String flightNumber) {
-        this.flightNumber = flightNumber;
+    public DeleteFlight (int flightId) {
+        this.flightId = flightId;
     }
 
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
-        Flight flight = flightBookingSystem.getFlightByNumber(flightNumber);
+        Flight flight = flightBookingSystem.getFlightByID(flightId);
 
         flight.delete();
 

@@ -2,8 +2,10 @@ package bcu.cmp5332.bookingsystem.gui;
 
 import bcu.cmp5332.bookingsystem.commands.Command;
 import bcu.cmp5332.bookingsystem.commands.DeleteCustomer;
+import bcu.cmp5332.bookingsystem.commands.DeleteFlight;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.Customer;
+import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 import javax.swing.*;
@@ -14,8 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class DeleteCustomerWindow extends JFrame implements ActionListener {
-
+public class DeleteFlightWindow extends JFrame implements ActionListener {
     private MainWindow mw;
     private FlightBookingSystem fbs;
 
@@ -23,14 +24,13 @@ public class DeleteCustomerWindow extends JFrame implements ActionListener {
 
     private JButton cancelBtn = new JButton("Cancel");
 
-    public DeleteCustomerWindow (MainWindow mw, FlightBookingSystem fbs){
+    public DeleteFlightWindow (MainWindow mw, FlightBookingSystem fbs) {
         this.mw = mw;
         this.fbs = fbs;
         initialize();
     }
 
-
-    private void initialize () {
+    public void initialize (){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ignored){}
@@ -47,18 +47,19 @@ public class DeleteCustomerWindow extends JFrame implements ActionListener {
 
         cancelBtn.addActionListener(this);
 
-        List<Customer> customerList = fbs.getCustomers();
+        List<Flight> flightList = fbs.getFlights();
         // headers for the table
-        String[] columns = new String[]{"ID", "Name", "Phone", "Email"};
+        String[] columns = new String[]{"ID", "Flight Number", "Origin", "Destination", "Date"};
 
-        Object[][] data = new Object[customerList.size()][4];
-        for(int i=0; i < customerList.size(); i++){
-            Customer customer = customerList.get(i);
+        Object[][] data = new Object[flightList.size()][5];
+        for(int i=0; i < flightList.size(); i++){
+            Flight flight = flightList.get(i);
 
-            data[i][0] = customer.getId();
-            data[i][1] = customer.getName();
-            data[i][2] = customer.getPhone();
-            data[i][3] = customer.getEmail();
+            data[i][0] = flight.getId();
+            data[i][1] = flight.getFlightNumber();
+            data[i][2] = flight.getOrigin();
+            data[i][3] = flight.getDestination();
+            data[i][4] = flight.getDepartureDate().toString();
         }
 
         JTable table = new JTable(data, columns);
@@ -69,9 +70,9 @@ public class DeleteCustomerWindow extends JFrame implements ActionListener {
                 JTable target = (JTable)e.getSource();
                 int row = target.getSelectedRow();
 
-                int custNo = Integer.parseInt(target.getValueAt(row, 0).toString());
+                int flightID = Integer.parseInt(target.getValueAt(row, 0).toString());
 
-                deleteCustomer(custNo);
+                deleteFlight(flightID);
             }
         });
 
@@ -90,13 +91,14 @@ public class DeleteCustomerWindow extends JFrame implements ActionListener {
         }
     }
 
-    private void deleteCustomer(int customerID){
-        Customer customer;
+    private void deleteFlight(int flightId){
+        Flight flight;
         try {
-            customer = fbs.getCustomerByID(customerID);
+            flight = fbs.getFlightByID(flightId);
 
             int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete "
-                            + customer.getId() + ": " + customer.getName(), "Confirm",
+                            + flight.getId() + ": #" + flight.getFlightNumber() + " || " + flight.getOrigin()
+                            + " -> " + flight.getDestination(), "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
             if (response == JOptionPane.NO_OPTION) {
@@ -105,19 +107,17 @@ public class DeleteCustomerWindow extends JFrame implements ActionListener {
             } else if (response == JOptionPane.YES_OPTION) {
                 System.out.println("Deletion confirmed.");
 
-                Command command = new DeleteCustomer(customerID);
+                Command command = new DeleteFlight(flightId);
                 command.execute(fbs);
                 JOptionPane.showMessageDialog(this, "Delete complete");
             } else if (response == JOptionPane.CLOSED_OPTION) {
                 System.out.println("Window closed");
                 JOptionPane.showMessageDialog(this, "Delete cancelled");
             }
-
-        } catch(FlightBookingSystemException ex){
+        } catch (FlightBookingSystemException ex) {
             JOptionPane.showMessageDialog(this, "Error: " +
-                    ex.getMessage(), "Could not delete user.", JOptionPane.ERROR_MESSAGE);
+                    ex.getMessage(), "Could not delete flight.", JOptionPane.ERROR_MESSAGE);
             this.setVisible(false);
         }
     }
-
 }
