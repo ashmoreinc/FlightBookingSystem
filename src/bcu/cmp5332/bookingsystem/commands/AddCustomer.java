@@ -8,8 +8,9 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 import java.io.IOException;
 
 /**
- * Command for adding a Customer to the FlightBookingSystem. Execute adds the customer supplied to the FlightBookingSystem
- * @author Cain Ashmore
+ * Command for adding a Customer to the FlightBookingSystem. Execute adds the customer supplied to the FlightBookingSystem. Extends Command
+ * @author Cain Ashmore & Yasser Ibrahim
+ * @see Command
  * @see Customer
  * @see FlightBookingSystem
  */
@@ -19,12 +20,23 @@ public class AddCustomer implements Command {
     private final String phone;
     private final String email;
 
+    /**
+     *
+     * @param name  The name of the customer
+     * @param phone The phone number of the customer
+     * @param email The email of the customer
+     */
     public AddCustomer(String name, String phone, String email) {
         this.name = name;
         this.phone = phone;
         this.email = email;
     }
 
+    /**
+     * Executes the command action.
+     * @param flightBookingSystem   The flight booking system the customer is to be added too.
+     * @throws FlightBookingSystemException Throws the FlightBookingSystemException when anything occurs which will not allow the customer to be created.
+     */
     @Override
     public void execute(FlightBookingSystem flightBookingSystem) throws FlightBookingSystemException {
         int maxId = 0;

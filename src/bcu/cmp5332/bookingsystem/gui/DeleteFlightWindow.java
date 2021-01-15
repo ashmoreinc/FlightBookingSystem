@@ -16,6 +16,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+
+/**
+ * The pop up window used to select and confirm the Flight to delete.
+ * Extends JFrame
+ * Implements ActionListener
+ * @author Cain Ashmore & Yasser Ibrahim
+ * @see FlightBookingSystem
+ * @see Flight
+ */
 public class DeleteFlightWindow extends JFrame implements ActionListener {
     private MainWindow mw;
     private FlightBookingSystem fbs;
@@ -24,6 +33,11 @@ public class DeleteFlightWindow extends JFrame implements ActionListener {
 
     private JButton cancelBtn = new JButton("Cancel");
 
+    /**
+     * Constructs and initializes the DeleteWindow
+     * @param mw    The window which triggered this pop up window
+     * @param fbs   The FlightBookingSystem which the Flight will be deleted from
+     */
     public DeleteFlightWindow (MainWindow mw, FlightBookingSystem fbs) {
         this.mw = mw;
         this.fbs = fbs;
@@ -84,6 +98,10 @@ public class DeleteFlightWindow extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Handles the events triggered
+     * @param ae    ActionEvent which holds the event information
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == cancelBtn) {

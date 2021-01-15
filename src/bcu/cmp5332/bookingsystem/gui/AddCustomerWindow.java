@@ -10,6 +10,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The pop up window which shows a form to add a Customer to the FlightBookingSystem.
+ * Extends JFrame
+ * Implements ActionListener
+ * @author Cain Ashmore & Yasser Ibrahim
+ * @see FlightBookingSystem
+ * @see bcu.cmp5332.bookingsystem.model.Customer
+ */
 public class AddCustomerWindow extends JFrame implements ActionListener {
 
     private MainWindow mw;
@@ -20,14 +28,16 @@ public class AddCustomerWindow extends JFrame implements ActionListener {
     private JButton addBtn = new JButton("Add");
     private JButton cancelBtn = new JButton("Cancel");
 
+    /**
+     * stores the main window and runs the initialize method.
+     * @param mw    The MainWindow which the pop up was created from
+     * @see MainWindow
+     */
     public AddCustomerWindow(MainWindow mw) {
         this.mw = mw;
         initialize();
     }
 
-    /**
-     * Init the JFrame
-     */
     private void initialize(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -62,6 +72,10 @@ public class AddCustomerWindow extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * The event listener which GUI elements can point to, to handle events.
+     * @param ae    The ActionEvent that triggered this function
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == addBtn) {

@@ -3,6 +3,8 @@ package bcu.cmp5332.bookingsystem.gui;
 import bcu.cmp5332.bookingsystem.commands.AddFlight;
 import bcu.cmp5332.bookingsystem.commands.Command;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
+import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -18,6 +20,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+/**
+ * The pop up window which shows a form to add a Flight to the FlightBookingSystem.
+ * Extends JFrame
+ * Implements ActionListener
+ * @author Cain Ashmore & Yasser Ibrahim
+ * @see FlightBookingSystem
+ * @see bcu.cmp5332.bookingsystem.model.Flight
+ */
 public class AddFlightWindow extends JFrame implements ActionListener {
 
     private MainWindow mw;
@@ -31,14 +41,16 @@ public class AddFlightWindow extends JFrame implements ActionListener {
     private JButton addBtn = new JButton("Add");
     private JButton cancelBtn = new JButton("Cancel");
 
+    /**
+     * stores the main window and runs the initialize method.
+     * @param mw    The MainWindow which the pop up was created from
+     * @see MainWindow
+     */
     public AddFlightWindow(MainWindow mw) {
         this.mw = mw;
         initialize();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
     private void initialize() {
 
         try {
@@ -82,16 +94,20 @@ public class AddFlightWindow extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * The event manager which handles events that set this as the handler
+     * @param ae    ActionEvent of the event that triggered this call.
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == addBtn) {
-            addBook();
+            addFlight();
         } else if (ae.getSource() == cancelBtn) {
             this.setVisible(false);
         }
     }
 
-    private void addBook() {
+    private void addFlight() {
         try {
             String flightNumber = flightNoText.getText();
             String origin = originText.getText();

@@ -6,18 +6,29 @@ import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
-public class FlightCustomerList extends JFrame implements ActionListener {
+/**
+ * The pop up window which shows a list of Customers of a selected Flight in the FlightBookingSystem.
+ * Extends JFrame
+ * @author Cain Ashmore & Yasser Ibrahim
+ * @see FlightBookingSystem
+ * @see bcu.cmp5332.bookingsystem.model.Booking
+ * @see Customer
+ */
+public class FlightCustomerList extends JFrame{
 
     private MainWindow mw;
     private FlightBookingSystem fbs;
     private Flight flight;
 
+    /**
+     * Constructs the window and initializes the GUI.
+     * @param mw    The main window which the pop up was created from
+     * @param fbs   The FlightBookingSystem which the data will be pulled from
+     * @param flightID  The flightID of the flight whose customer list is to be viewed, used to get the Flight.
+     */
     public FlightCustomerList (MainWindow mw, FlightBookingSystem fbs, int flightID){
         this.mw = mw;
         this.fbs = fbs;
@@ -33,6 +44,12 @@ public class FlightCustomerList extends JFrame implements ActionListener {
         initialize();
     }
 
+    /**
+     * Constructs the window and initializes the GUI, without having to fetch the Flight via it's ID
+     * @param mw    The main window which the pop up was created from
+     * @param fbs   The FlightBookingSystem which the data will be pulled from
+     * @param flight The Flight which the customers are to be listed for.
+     */
     public FlightCustomerList (MainWindow mw, FlightBookingSystem fbs, Flight flight){
         this.mw = mw;
         this.fbs = fbs;
@@ -79,10 +96,5 @@ public class FlightCustomerList extends JFrame implements ActionListener {
         setLocationRelativeTo(mw);
 
         setVisible(true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 }

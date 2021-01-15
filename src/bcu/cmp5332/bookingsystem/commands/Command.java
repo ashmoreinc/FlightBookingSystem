@@ -3,6 +3,10 @@ package bcu.cmp5332.bookingsystem.commands;
 import bcu.cmp5332.bookingsystem.main.FlightBookingSystemException;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
+/** Interface for building a Command to interact with the FlightBookingSystem.
+ * @see FlightBookingSystem
+ * @see FlightBookingSystemException
+ */
 public interface Command {
 
     public static final String HELP_MESSAGE = "Commands:\n"

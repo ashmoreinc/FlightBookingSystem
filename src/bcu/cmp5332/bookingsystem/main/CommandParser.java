@@ -8,8 +8,21 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses Command Strings and returns a valid Command for execution or an Exception of failure
+ * @see Command
+ * @see IOException
+ * @see FlightBookingSystemException
+ */
 public class CommandParser {
 
+	/**
+	 * The main command parser
+	 * @param line	The command string which will be parsed into a command
+	 * @return	Command
+	 * @throws IOException
+	 * @throws FlightBookingSystemException Thrown on Failure to parse a valid command or if there is an issue with the command
+	 */
 	public static Command parse(String line) throws IOException, FlightBookingSystemException {
 		try {
 			String[] parts = line.split(" ", 3);

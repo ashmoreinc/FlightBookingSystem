@@ -7,16 +7,28 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
-public class CustomerBookingList  extends JFrame implements ActionListener {
+/**
+ * The pop up window which shows a list of Bookings of a selected Customer in the FlightBookingSystem.
+ * Extends JFrame
+ * @author Cain Ashmore & Yasser Ibrahim
+ * @see FlightBookingSystem
+ * @see bcu.cmp5332.bookingsystem.model.Booking
+ * @see Customer
+ */
+public class CustomerBookingList  extends JFrame{
 
     private MainWindow mw;
     private FlightBookingSystem fbs;
     private Customer customer;
 
+    /**
+     * Constructs the window and initializes the GUI.
+     * @param mw    The main window which the pop up was created from
+     * @param fbs   The FlightBookingSystem which the data will be pulled from
+     * @param customerID    The customerID of the customer whose booking is to be viewed, used to get the Customer.
+     */
     public CustomerBookingList (MainWindow mw, FlightBookingSystem fbs, int customerID){
         this.mw = mw;
         this.fbs = fbs;
@@ -32,6 +44,12 @@ public class CustomerBookingList  extends JFrame implements ActionListener {
         initialize();
     }
 
+    /**
+     * Constructs the window and initializes the GUI, without having to fetch the Customer via it's ID
+     * @param mw    The main window which the pop up was created from
+     * @param fbs   The FlightBookingSystem which the data will be pulled from
+     * @param customer The Customer which the Bookings are to be listed for.
+     */
     public CustomerBookingList(MainWindow mw, FlightBookingSystem fbs, Customer customer){
         this.mw = mw;
         this.fbs = fbs;
@@ -79,10 +97,5 @@ public class CustomerBookingList  extends JFrame implements ActionListener {
         setLocationRelativeTo(mw);
 
         setVisible(true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 }

@@ -17,8 +17,7 @@ import java.util.Scanner;
 /**
  * Implements DataManger.
  * Stores and loads the Bookings for FlightBookingSystem between storage and memory.
- * Data held in format: CustomerID::FlightID::LocalDate
- * @author Cain Ashmore
+ * <p>Data held in format: CustomerID::FlightID::LocalDate</p>
  * @see bcu.cmp5332.bookingsystem.data.DataManager
  * @see FlightBookingSystem
  * @see Booking
@@ -29,6 +28,14 @@ public class BookingDataManager implements DataManager {
     
     public final String RESOURCE = "./resources/data/bookings.txt";
 
+    /**
+     * Loads the Booking data from the RESOURCE file. Then creates and returns a FlightBookingSystem built from that data.
+     * @param fbs   TheFlightBookingSystem which data will be loaded into.
+     * @throws IOException  Thrown if the RESOURCE file cannot be accessed.
+     * @throws FlightBookingSystemException Thrown if there is an issue storing data into the FlightBookingSystem
+     * @see FlightBookingSystem
+     * @see Booking
+     */
     @Override
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {
         try (Scanner sc = new Scanner(new File(RESOURCE))){
@@ -87,6 +94,12 @@ public class BookingDataManager implements DataManager {
         }
     }
 
+    /**
+     * Stores Booking data from the FlightBookingSystem into a RESOURCE file.
+     * @param fbs   The FlightBookingSystem which data is to be taken from.
+     * @throws IOException  Thrown if the RESOURCE file cannot be accessed.
+     * @see FlightBookingSystem
+     */
     @Override
     public void storeData(FlightBookingSystem fbs) throws IOException {
         try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {

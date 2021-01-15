@@ -19,8 +19,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
 
+/**
+ * Main window for the GUI application for managing a FlightBookingSystem.
+ * Extends JFrame
+ * Implements ActionListener
+ * @see FlightBookingSystem
+ * @see JFrame
+ * @see ActionListener
+ */
 public class MainWindow extends JFrame implements ActionListener {
 
     private JMenuBar menuBar;
@@ -45,19 +52,24 @@ public class MainWindow extends JFrame implements ActionListener {
 
     private FlightBookingSystem fbs;
 
+    /**
+     * Initialises the Interface
+     * @param fbs   The FlightBookingSystem to manage
+     */
     public MainWindow(FlightBookingSystem fbs) {
 
         initialize();
         this.fbs = fbs;
     }
-    
+
+    /**
+     * FlightBookingSystem getter
+     * @return  FlightBookingSystem
+     */
     public FlightBookingSystem getFlightBookingSystem() {
         return fbs;
     }
 
-    /**
-     * Initialize the contents of the frame.
-     */
     private void initialize() {
 
         try {
@@ -133,13 +145,23 @@ public class MainWindow extends JFrame implements ActionListener {
 /* Uncomment the following line to not terminate the console app when the window is closed */
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);        
 
-    }	
+    }
 
+    /**
+     * The Main function which allows this to run as a standalone applciation
+     * @param args  Arguments to be passed on application start up
+     * @throws IOException  Thrown if the storage files cannot be read
+     * @throws FlightBookingSystemException Thrown if theres an issue setting up the loaded data
+     */
     public static void main(String[] args) throws IOException, FlightBookingSystemException {
         FlightBookingSystem fbs = FlightBookingSystemData.load();
         new MainWindow(fbs);
     }
 
+    /**
+     * Event listener for handling events.
+     * @param ae    ActionEvent which holds the vent information
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
 
@@ -177,6 +199,9 @@ public class MainWindow extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Displays the flights onto the Main application window
+     */
     public void displayFlights() {
         List<Flight> flightsList = fbs.getAvailableFlights();
         // headers for the table
@@ -225,6 +250,9 @@ public class MainWindow extends JFrame implements ActionListener {
         });
     }
 
+    /**
+     * Displays the customers onto the Main application window
+     */
     public void displayCustomers() {
         List<Customer> customers = fbs.getAvailableCustomers();
         // table headers

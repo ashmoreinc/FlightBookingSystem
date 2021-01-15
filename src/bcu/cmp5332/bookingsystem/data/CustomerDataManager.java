@@ -10,10 +10,26 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Implements DataManager
+ * Stores and loads the Customer data for the FlightBookingSystem between storage and memory
+ * <p>Data held in the format: ID::Name::Phone Number::Email::Deletion Status</p>
+ * @see DataManager
+ * @see Customer
+ * @see FlightBookingSystem
+ */
 public class CustomerDataManager implements DataManager {
 
     private final String RESOURCE = "./resources/data/customers.txt";
-    
+
+    /**
+     * Loads the customer data from storage into a FlightBookingSystem
+     * @param fbs   The FlightBookingSystem which Customer data is to be loaded to.
+     * @throws IOException  Thrown if the RESOURCE file cannot be accessed
+     * @throws FlightBookingSystemException Thrown if there is an issue with loading the data into the FlightBookingSystem
+     * @see FlightBookingSystem
+     * @see Customer
+     */
     @Override
     public void loadData(FlightBookingSystem fbs) throws IOException, FlightBookingSystemException {
         try (Scanner sc = new Scanner(new File(RESOURCE))){
@@ -43,6 +59,12 @@ public class CustomerDataManager implements DataManager {
         }
     }
 
+    /**
+     * Stores Customer data from the FlightBookingSystem into a RESOURCE file.
+     * @param fbs   The FlightBookingSystem which data is to be taken from.
+     * @throws IOException  Thrown if the RESOURCE file cannot be accessed.
+     * @see FlightBookingSystem
+     */
     @Override
     public void storeData(FlightBookingSystem fbs) throws IOException {
         try (PrintWriter out = new PrintWriter(new FileWriter(RESOURCE))) {
