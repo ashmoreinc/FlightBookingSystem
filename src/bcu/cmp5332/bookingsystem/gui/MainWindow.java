@@ -175,13 +175,14 @@ public class MainWindow extends JFrame implements ActionListener {
     }
 
     public void displayFlights() {
-        List<Flight> flightsList = fbs.getFlights();
+        List<Flight> flightsList = fbs.getAvailableFlights();
         // headers for the table
         String[] columns = new String[]{"Flight No", "Origin", "Destination", "Departure Date", "Seat Count", "Seats Reserved", "Seat Price (£)"};
 
         Object[][] data = new Object[flightsList.size()][7];
         for (int i = 0; i < flightsList.size(); i++) {
             Flight flight = flightsList.get(i);
+
             data[i][0] = flight.getFlightNumber();
             data[i][1] = flight.getOrigin();
             data[i][2] = flight.getDestination();
@@ -198,7 +199,7 @@ public class MainWindow extends JFrame implements ActionListener {
     }
 
     public void displayCustomers() {
-        List<Customer> customers = fbs.getCustomers();
+        List<Customer> customers = fbs.getAvailableCustomers();
         // table headers
         String[] columns = new String[]{"Name", "Phone", "Email"};
 

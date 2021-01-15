@@ -20,9 +20,31 @@ public class FlightBookingSystem {
         return Collections.unmodifiableList(out);
     }
 
+    public List<Flight> getAvailableFlights(){
+        List<Flight> out = new ArrayList<>();
+        for(Flight flight : flights.values()) {
+            if(!flight.getDeleted()){
+                out.add(flight);
+            }
+        }
+
+        return out;
+    }
+
     public List<Customer> getCustomers(){
         List<Customer> out = new ArrayList<>(customers.values());
         return Collections.unmodifiableList(out);
+    }
+
+    public List<Customer> getAvailableCustomers(){
+        List<Customer> out = new ArrayList<>();
+        for(Customer customer : customers.values()) {
+            if(!customer.getDeleted()){
+                out.add(customer);
+            }
+        }
+
+        return out;
     }
 
     public Flight getFlightByID(int id) throws FlightBookingSystemException {
