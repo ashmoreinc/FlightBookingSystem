@@ -7,6 +7,8 @@ import bcu.cmp5332.bookingsystem.model.Flight;
 import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 import javax.swing.JFrame;
@@ -17,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 public class MainWindow extends JFrame implements ActionListener {
 
@@ -193,27 +196,76 @@ public class MainWindow extends JFrame implements ActionListener {
         }
 
         JTable table = new JTable(data, columns);
+
         this.getContentPane().removeAll();
         this.getContentPane().add(new JScrollPane(table));
         this.revalidate();
+
+        // A lil hacky way to access this rather than the MouseAdapter
+        MainWindow parent = this;
+
+        // Mouse listener
+        table.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                JTable target = (JTable)e.getSource();
+                int row = target.getSelectedRow();
+                int col = target.getSelectedColumn();
+
+                // Trigger a pop up with the customers when the reserved seats has been clicked.
+                if(col == 5) {
+                    try {
+                        Flight flight = fbs.getFlightByNumber(target.getValueAt(row, 0).toString());
+                        new FlightCustomerList(parent, fbs, flight);
+                    } catch (FlightBookingSystemException ex) {
+                        JOptionPane.showMessageDialog(parent, "Error: " +
+                                ex.getMessage(), "Could retrieve flight data.", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
     }
 
     public void displayCustomers() {
         List<Customer> customers = fbs.getAvailableCustomers();
         // table headers
-        String[] columns = new String[]{"Name", "Phone", "Email"};
+        String[] columns = new String[]{"ID", "Name", "Phone", "Email", "Bookings"};
 
-        Object[][] data = new Object[customers.size()][3];
+        Object[][] data = new Object[customers.size()][5];
         for(int i=0; i < customers.size(); i++){
             Customer customer = customers.get(i);
-            data[i][0] = customer.getName();
-            data[i][1] = customer.getPhone();
-            data[i][2] = customer.getEmail();
+            data[i][0] = customer.getId();
+            data[i][1] = customer.getName();
+            data[i][2] = customer.getPhone();
+            data[i][3] = customer.getEmail();
+            data[i][4] = customer.getBookings().size();
         }
 
         JTable table = new JTable(data, columns);
         this.getContentPane().removeAll();
         this.getContentPane().add(new JScrollPane(table));
         this.revalidate();
+
+        // A lil hacky way to access this rather than the MouseAdapter
+        MainWindow parent = this;
+
+        // Mouse listener
+        table.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                JTable target = (JTable)e.getSource();
+                int row = target.getSelectedRow();
+                int col = target.getSelectedColumn();
+
+                // Trigger a pop up with the customers when the reserved seats has been clicked.
+                if(col == 4) {
+                    try {
+                        Customer customer = fbs.getCustomerByID(Integer.parseInt(target.getValueAt(row, 0).toString()));
+                        new CustomerBookingList(parent, fbs, customer);
+                    } catch (FlightBookingSystemException ex) {
+                        JOptionPane.showMessageDialog(parent, "Error: " +
+                                ex.getMessage(), "Could retrieve customer data.", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
     }
 }

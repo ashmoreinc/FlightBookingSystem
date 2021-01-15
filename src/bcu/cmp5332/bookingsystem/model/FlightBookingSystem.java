@@ -56,7 +56,7 @@ public class FlightBookingSystem {
 
     public Flight getFlightByNumber(String flightNumber) throws FlightBookingSystemException {
         for(Flight flightEntry : flights.values()){
-            if(flightEntry.getFlightNumber() == flightNumber){
+            if(flightEntry.getFlightNumber().equals(flightNumber)){
                 return flightEntry;
             }
         }
