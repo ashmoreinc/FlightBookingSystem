@@ -133,7 +133,7 @@ public class Flight {
 
     /**
      * The getter for the list of passengers
-     * @return  List<Customer>
+     * @return  List
      */
     public List<Customer> getPassengers() {
         return new ArrayList<>(passengers);
@@ -176,7 +176,7 @@ public class Flight {
      * @return  String
      */
     public String getDetailsShort() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return "Flight #" + id + " - " + flightNumber + " - " + origin + " to " 
                 + destination + " on " + departureDate.format(dtf);
     }
@@ -186,7 +186,7 @@ public class Flight {
      * @return  String
      */
     public String getDetailsLong() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return "Flight #" + id + " - " + flightNumber + " - " + origin + " to "
                 + destination + " on " + departureDate.format(dtf) + " - " + passengers.size() + "/" + capacity
                 + " Seats taken, with a base cost of £" + (double)basePrice / 100;

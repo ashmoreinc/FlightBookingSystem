@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  * Command for adding a Customer to the FlightBookingSystem. Execute adds the customer supplied to the FlightBookingSystem. Extends Command
- * @author Cain Ashmore & Yasser Ibrahim
+ * @author Cain Ashmore and Yasser Ibrahim
  * @see Command
  * @see Customer
  * @see FlightBookingSystem

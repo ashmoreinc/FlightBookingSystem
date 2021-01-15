@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * The command to delete a customer from the FlightBookingSystem. Extends Command.
- * @author Cain Ashmore & Yasser Ibrahim
+ * @author Cain Ashmore and Yasser Ibrahim
  * @see Command
  * @see Customer
  * @see FlightBookingSystem

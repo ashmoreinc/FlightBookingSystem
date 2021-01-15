@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 /**
  * Command for adding a Flight to the FlightBookingSystem. Extends Command.
- * @author Cain Ashmore & Yasser Ibrahim
+ * @author Cain Ashmore and Yasser Ibrahim
  * @see Command
  * @see Flight
  * @see FlightBookingSystem

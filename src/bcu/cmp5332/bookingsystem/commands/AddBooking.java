@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 /**
  * Command used to add a booking to a flight for a customer. Extends Command.
- * @author Cain Ashmore & Yasser Ibrahim
+ * @author Cain Ashmore and Yasser Ibrahim
  * @see Command
  * @see Flight
  * @see Customer

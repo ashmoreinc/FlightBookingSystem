@@ -21,7 +21,7 @@ import java.util.List;
  * The pop up window used to select and confirm the Flight to delete.
  * Extends JFrame
  * Implements ActionListener
- * @author Cain Ashmore & Yasser Ibrahim
+ * @author Cain Ashmore and Yasser Ibrahim
  * @see FlightBookingSystem
  * @see Flight
  */

@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
  * The pop up window which shows a form to add a Customer to the FlightBookingSystem.
  * Extends JFrame
  * Implements ActionListener
- * @author Cain Ashmore & Yasser Ibrahim
+ * @author Cain Ashmore and Yasser Ibrahim
  * @see FlightBookingSystem
  * @see bcu.cmp5332.bookingsystem.model.Customer
  */

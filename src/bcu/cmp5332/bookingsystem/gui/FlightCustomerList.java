@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * The pop up window which shows a list of Customers of a selected Flight in the FlightBookingSystem.
  * Extends JFrame
- * @author Cain Ashmore & Yasser Ibrahim
+ * @author Cain Ashmore and Yasser Ibrahim
  * @see FlightBookingSystem
  * @see bcu.cmp5332.bookingsystem.model.Booking
  * @see Customer

@@ -100,7 +100,7 @@ public class Customer {
 
     /**
      * The bookings list getter
-     * @return  List<Booking>
+     * @return  List
      */
     public List<Booking> getBookings() {
         return bookings;

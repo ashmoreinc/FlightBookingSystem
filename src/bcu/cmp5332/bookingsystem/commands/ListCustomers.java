@@ -7,7 +7,7 @@ import bcu.cmp5332.bookingsystem.model.FlightBookingSystem;
 import java.util.List;
 
 /** Command for listing customers from FlightBookingSystem. execute() prints all the customers to stdout
- * @author Cain Ashmore & Yasser Ibrahim
+ * @author Cain Ashmore and Yasser Ibrahim
  * @see Command
  * @see Customer
  * @see FlightBookingSystem

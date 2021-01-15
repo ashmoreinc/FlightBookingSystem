@@ -24,7 +24,7 @@ import javax.swing.UIManager;
  * The pop up window which shows a form to add a Flight to the FlightBookingSystem.
  * Extends JFrame
  * Implements ActionListener
- * @author Cain Ashmore & Yasser Ibrahim
+ * @author Cain Ashmore and Yasser Ibrahim
  * @see FlightBookingSystem
  * @see bcu.cmp5332.bookingsystem.model.Flight
  */
@@ -55,7 +55,7 @@ public class AddFlightWindow extends JFrame implements ActionListener {
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
 
         }
 
@@ -112,7 +112,7 @@ public class AddFlightWindow extends JFrame implements ActionListener {
             String flightNumber = flightNoText.getText();
             String origin = originText.getText();
             String destination = destinationText.getText();
-            LocalDate departureDate = null;
+            LocalDate departureDate;
             int capacity, basePrice;
             try {
                 departureDate = LocalDate.parse(depDateText.getText());

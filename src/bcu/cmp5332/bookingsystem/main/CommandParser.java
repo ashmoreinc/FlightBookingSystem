@@ -20,7 +20,7 @@ public class CommandParser {
 	 * The main command parser
 	 * @param line	The command string which will be parsed into a command
 	 * @return	Command
-	 * @throws IOException
+	 * @throws IOException	Thrown on issues with the IO
 	 * @throws FlightBookingSystemException Thrown on Failure to parse a valid command or if there is an issue with the command
 	 */
 	public static Command parse(String line) throws IOException, FlightBookingSystemException {
@@ -87,7 +87,7 @@ public class CommandParser {
 					return new CancelBooking(arg1Int, arg2Int);
 				}
 			}
-		} catch (NumberFormatException ex) {
+		} catch (NumberFormatException ignored) {
 
 		}
 
@@ -102,8 +102,7 @@ public class CommandParser {
 			attempts--;
 			System.out.print("Departure Date (\"YYYY-MM-DD\" format): ");
 			try {
-				LocalDate departureDate = LocalDate.parse(br.readLine());
-				return departureDate;
+				return LocalDate.parse(br.readLine());
 			} catch (DateTimeParseException dtpe) {
 				System.out.println("Date must be in YYYY-MM-DD format. " + attempts + " attempts remaining...");
 			}
